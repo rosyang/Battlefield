@@ -1,46 +1,58 @@
-//import java.util.ArrayList;
+/*==============================================
+  class Player -- superclass for the players of Battleships
+  ==============================================*/
+
+import java.util.ArrayList;
+
 public abstract class Player {
 
-    //instance vars
+    //========== Instance Variables ==========//
+    protected String _nation;
+    protected Board _battlefield;
     protected int _numShips;
     protected boolean _isTurn;
-    protected  Tile[][] _board;
     
-    public Player () {
-	_numShips = 10;
-	_board = new Tile[10][10];/*
-	for (int x = 1; x < _board[1].length; x++) {
-	    _board[1][x] = x;
-	}
-	for (int x = 1; x < _board.length; x++) {
-	    _board[x][1] = x;
-	    }*/
+
+    //========== Default Constructor =========//
+    public Player() {
+	_numShips = 5;
+	_isTurn = false;
     }
+
+
+    //========== Constructor ==========//
+    public Player( String nation ){
+	this();
+	_nation = nation;
+    }
+
+
+    //========== METHODS ==========//
+    
+    //Accessors
+    public String getNation() {
+	return _nation;
+    }
+    public String getBattlefield() {
+	return _battlefield;
+    }
+    public void setBattlefield() {
+	_battlefield = new Board();
+    }
+    
 
     public boolean hasShips() {
 	return _numShips > 0;
     }
     
-    public abstract void attack(Player opp, int x, int y);
 
-    public String toString () {
-	String ret = "  1 2 3 4 5 6 7 8 9 10\n";
-	for (int x = 0; x < _board.length; x++ ) {
-	    ret += x + 1 + " ";
-	    for (Tile t : _board[x]) {
-		ret += t + " " ;
-	    }
-	    ret += "\n";
-	}
-	return ret;
-    }
+    public abstract void normalAttack(Player opp, int x, int y);
+
+    public abstract void specialAttack (Player opp, int x, int y);
+
+    /*
     public void place (int r, int c) {
 	_board[r][c] = new Tile( );
     }
-    /*
-    public static void main (String[] args) {
-	Player trial = new Player();//won't work, abstract can't be instantiated
-	System.out.println(trial);
-	}*/
-
+    */
 }
