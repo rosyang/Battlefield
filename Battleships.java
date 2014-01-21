@@ -20,39 +20,41 @@ public class Battleships {
     //Methods
     public void newGame() {
 
-	String s;
-	String type;
-	String name;
-
-	s = "Welcome to Battleships!\n";
-	s+= "Do you want to play with 2 players or against the computer?";
+	String s = "Welcome to Battleships!\n";
+	s+= "Who is your enemy?";
 	System.out.print(s);
+	String typed = Keyboard.readString();
 
-	type = Keyboard.readString();
+	//at least one person has to be human
+	player1 = new Human();
+	System.out.print("Player 1, what is your name? ");
+	String name = Keyboard.readString();
+	player1.setName(name);
+	player1.turn();//method changing _isTurn back and form still has to be created
 
-	if( type.equals( "2 players" ) ) {
-	    s = "Player 1, what is your name?";
-	    System.out.print(s);
-	    name = Keyboard.readString();
-	    player1 = new Human(name);
-
-	    s = "Player 2, what is your name?";
-	    System.out.print(s);
+	//initialize the 2nd player based on the choice
+	if( typed.equals( "2 players" ) ) {
+	    System.out.print("Player 2, what is your name? ");
 	    name = Keyboard.readString();
 	    player2 = new Human(name);
 	}
-	else if( type.equals("Computer") ) {
-	    s = "Player 1, what is your name?";
-	    System.out.print(s);
-	    name = Keyboard.readString();
-	    player1 = new Human(name);
-	    player2 = new Computer("Computer");
+	else if( typed.equals("Computer") ) {
+	    player2 = new Computer();
 	}
+	else 
+	    System.out.println("Sorry, please type either Human or Computer");
 	
     }
 
+    public void setup () {
+	//should this b in player?
+	//takes x y input & puts in ships
+	//computer will use a random method
+    }
     public boolean playTurn() {
-
+	//?
+	while (player1.hasShips() && player2.hasShips()) {
+	}
 
 
     }

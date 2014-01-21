@@ -17,7 +17,7 @@ public class Tile {
 	_type = "water";
 	_length = 1;
 	_face = "-W-";
-	_isFaceUp = false;
+	_isFaceUp = false;//true when not water & not hit? clarify 
     }
 
     //Constructor

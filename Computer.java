@@ -1,14 +1,17 @@
 public class Computer extends Player {
     
-    //private _guess;
+    //private _guess; possibly get all coords & guess by chance?
     
 
     public Computer() {
-	_numShips = 10;
-	_board = new Tiles();
+	super();
+	_name = "Computer";
     }
 
-    public void attack (Player opp, int x, int y) {
+    public int guessR () {
+	return 10 + (int) Math.random();
     }
-
+    public int guessC () {
+	return 10 + (int) Math.random();
+    }
 }
