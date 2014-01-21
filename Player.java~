@@ -8,31 +8,23 @@ public abstract class Player {
     
     public Player () {
 	_numShips = 10;
-	_board = new Tile[10][10];
-	//by default, an empty sea
-        for (int r = 1; r <= _board.length; r++) {
-	    //can't be _board[r].length b/c _board[10] is out of bounds
-	    for (int c = 1; c <= 10; c++) {
-		place(r,c, new Tile());
-	    }
+	_board = new Tile[10][10];/*
+	for (int x = 1; x < _board[1].length; x++) {
+	    _board[1][x] = x;
 	}
+	for (int x = 1; x < _board.length; x++) {
+	    _board[x][1] = x;
+	    }*/
     }
 
     public boolean hasShips() {
 	return _numShips > 0;
     }
     
-    public boolean attack(Player opp, int r, int c) {
-	Tile  t = opp._board[r - 1][c - 1];
-	if (! t._type.equals("water")) {
-	    opp._board[r-1][c-1].flip();
-	    return true;
-	}
-        return false;
-    }
+    public abstract void attack(Player opp, int x, int y);
 
     public String toString () {
-	String ret = "   1   2   3   4   5   6   7   8   9   10\n";
+	String ret = "  1 2 3 4 5 6 7 8 9 10\n";
 	for (int x = 0; x < _board.length; x++ ) {
 	    ret += x + 1 + " ";
 	    for (Tile t : _board[x]) {
@@ -42,8 +34,8 @@ public abstract class Player {
 	}
 	return ret;
     }
-    public void place (int r, int c, Tile piece) {
-	_board[r-1][c-1] = piece;
+    public void place (int r, int c) {
+	_board[r][c] = new Tile( );
     }
     /*
     public static void main (String[] args) {

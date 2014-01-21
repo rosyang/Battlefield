@@ -3,7 +3,7 @@
   represents each tile of the game board
   =====================================*/
 
-public class Tile {
+public abstract class Tile {
 
     //Instance Variables
     protected String _type;
@@ -13,7 +13,7 @@ public class Tile {
     
     //Default constructor
     //default tile on a board represents water
-    public Tile() {
+    public Tiles() {
 	_type = "water";
 	_length = 1;
 	_face = "-W-";
@@ -21,7 +21,7 @@ public class Tile {
     }
 
     //Constructor
-    public Tile( String type, int length, String value ) {
+    public Tiles( String type, int length, String value ) {
 	this();
 	_type = type;
 	_length = length;

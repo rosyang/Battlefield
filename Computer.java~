@@ -9,6 +9,5 @@ public class Computer extends Player {
     }
 
     public void attack (Player opp, int x, int y) {
-    }
 
 }
