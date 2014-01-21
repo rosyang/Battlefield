@@ -18,17 +18,12 @@ public class Tile {
 	_type = "water";
 	_length = 1;
 	_face = "-W-";
-	_isFaceUp = false;//true when not water & not hit? clarify 
+	_isFaceUp = false;//true when not water & not hit? clarify ///Imagine water as the back of a tile. Tile flips when theres a ship/box
     }
 
-<<<<<<< HEAD
 
     //========== Constructor ==========//
     public Tiles( String type, int length, String value ) {
-=======
-    //Constructor
-    public Tile( String type, int length, String value ) {
->>>>>>> 942a62026b3417227270b81112ad4b717185979a
 	this();
 	_type = type;
 	_length = length;
@@ -55,7 +50,6 @@ public class Tile {
 	    return "-W-";
     }
 
-<<<<<<< HEAD
 
     public boolean equals( Object rightSide ) {
 	
@@ -65,6 +59,4 @@ public class Tile {
 	
     }
 
-=======
->>>>>>> 942a62026b3417227270b81112ad4b717185979a
 }
