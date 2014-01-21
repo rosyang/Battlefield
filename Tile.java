@@ -14,16 +14,21 @@ public class Tile {
     
     //========== Default constructor ==========//
     //default tile on a board represents water
-    public Tiles() {
+    public Tile() {
 	_type = "water";
 	_length = 1;
 	_face = "-W-";
-	_isFaceUp = false;
+	_isFaceUp = false;//true when not water & not hit? clarify 
     }
 
+<<<<<<< HEAD
 
     //========== Constructor ==========//
     public Tiles( String type, int length, String value ) {
+=======
+    //Constructor
+    public Tile( String type, int length, String value ) {
+>>>>>>> 942a62026b3417227270b81112ad4b717185979a
 	this();
 	_type = type;
 	_length = length;
@@ -50,6 +55,7 @@ public class Tile {
 	    return "-W-";
     }
 
+<<<<<<< HEAD
 
     public boolean equals( Object rightSide ) {
 	
@@ -59,4 +65,6 @@ public class Tile {
 	
     }
 
+=======
+>>>>>>> 942a62026b3417227270b81112ad4b717185979a
 }

@@ -9,6 +9,7 @@ public class Human extends Player {
 
     //========== Default Constructor ==========//
     public Human () {
+<<<<<<< HEAD
 	_battlefield = new Board();
 	_numShip = 5;
 	_isTurn = false;
@@ -38,8 +39,26 @@ public class Human extends Player {
 
     public void specialAttack (Player opp, int x, int y) {}
 
+=======
+	super();
+    }
+    public Human (String name) {
+        this();
+	_name = name;
+    }
+   
+>>>>>>> 942a62026b3417227270b81112ad4b717185979a
     public static void main (String[] args) {
-	Human person = new Human();
+	Player person = new Human();
+	//System.out.println(person);
+	//person._board[1][2] = new Tile("ship" , 1, "-x-");
+	person.place(1,2,new Tile("ship", 1, "-x-"));
+	person._board[0][1].flip();
+	System.out.println("before");
+	System.out.println(person);
+        Player opp = new Human();
+	opp.attack(person, 1, 2);
+	System.out.println("after");
 	System.out.println(person);
     }
 }
