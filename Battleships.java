@@ -34,7 +34,6 @@ public class Battleships {
       ================================================*/
     public void newGame() {
 
-<<<<<<< HEAD
 	String s;
 	String nation;
 
@@ -68,36 +67,11 @@ public class Battleships {
 	    System.out.print(s);
 
 	    difficulty = Keyboard.readInt();
-=======
-	String s = "Welcome to Battleships!\n";
-	s+= "Who is your enemy?";
-	System.out.print(s);
-	String typed = Keyboard.readString();
-
-	//at least one person has to be human
-	player1 = new Human();
-	System.out.print("Player 1, what is your name? ");
-	String name = Keyboard.readString();
-	player1.setName(name);
-	player1.turn();//method changing _isTurn back and form still has to be created
-
-	//initialize the 2nd player based on the choice
-	if( typed.equals( "2 players" ) ) {
-	    System.out.print("Player 2, what is your name? ");
-	    name = Keyboard.readString();
-	    player2 = new Human(name);
 	}
-	else if( typed.equals("Computer") ) {
-	    player2 = new Computer();
->>>>>>> 942a62026b3417227270b81112ad4b717185979a
-	}
-	else 
-	    System.out.println("Sorry, please type either Human or Computer");
 	
     }
 
-<<<<<<< HEAD
-    
+
     /*=========================================
       void newBoard() -- sets up a new board
       pre: A Human or a Computer has been initialized
@@ -148,19 +122,8 @@ public class Battleships {
 	newBoard();
 
         while (player1.hasShips() && player2.hasShips()) {
-
-=======
-    public void setup () {
-	//should this b in player?
-	//takes x y input & puts in ships
-	//computer will use a random method
-    }
-    public boolean playTurn() {
-	//?
-	while (player1.hasShips() && player2.hasShips()) {
->>>>>>> 942a62026b3417227270b81112ad4b717185979a
-	}
-
+        
+        }
 
     }
 
