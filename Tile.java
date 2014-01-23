@@ -1,26 +1,29 @@
 /*=====================================
   class Tiles
-  represents each tile of the game board
+  Represents each tile of the game board
   =====================================*/
 
 public class Tile {
 
-    //Instance Variables
+    //========== Instance Variables ==========//
     protected String _type;
     protected int _length;
     protected String _face;
     protected boolean _isFaceUp;
+
     
-    //Default constructor
+    //========== Default constructor ==========//
     //default tile on a board represents water
     public Tile() {
 	_type = "water";
 	_length = 1;
 	_face = "-W-";
-	_isFaceUp = false;//true when not water & not hit? clarify 
+	_isFaceUp = false;
+	//Imagine water as the back of a tile. Tile flips when theres a ship/box
     }
 
-    //Constructor
+
+    //========== Constructor ==========//
     public Tile( String type, int length, String value ) {
 	this();
 	_type = type;
@@ -28,21 +31,33 @@ public class Tile {
 	_face = value;
     }
 
-    //Methods
+
+    //========== METHODS ==========//
 
     public boolean isFaceUp() {
 	return _isFaceUp;
     }
 
+
     public void flip() {
 	_isFaceUp = !_isFaceUp;
     }
 
+
     public String toString() {
-	if( isFaceUp() )
+	if( _type.equals("axis") || isFaceUp() )
 	    return _face;
 	else
 	    return "-W-";
+    }
+
+
+    public boolean equals( Object rightSide ) {
+	
+	return ( this == rightSide ) || ( rightSide instanceof Tile 
+					  && this._face == ((Tile)rightSide)._face
+					  && this._isFaceUp == ((Tile)rightSide)._isFaceUp );
+	
     }
 
 }

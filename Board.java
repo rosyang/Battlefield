@@ -1,40 +1,75 @@
+/*======================================
+  class Board
+  Instantiates a player's board of Tiles
+  ======================================*/
+
 public class Board {
-    //instance vars
-    private int size = 10;
+
+    //========== Instance Variables ==========//
+    private static final int DEFAULT_SIZE = 11;
     private Tile[][] _board;
-    //constructor
-    public Board () {
-	board = new Tile[size][size];
-	for (int r = 1; r <= size; r ++) {
-	    for (int c = 1; c <= size; c++) {
-		place(r,c, new Tile());
+
+
+    //========== Default Constructor ==========//
+    public Board() {
+	_board = new Tile[DEFAULT_SIZE][DEFAULT_SIZE];
+
+	for( int r = 0; r < _board.length; r++ )
+	    for( int c = 0; c < _board[r].length; c++ ) {
+		if( r == 0 )
+		    set( r, c, new Tile("axis", 1, " " + c + " " ));
+		else if( c == 0 )
+		    set( r, c, new Tile("axis", 1, " " + r + " "  ));
+		else
+		    set( r, c, new Tile() );
 	    }
-	}
     }
 
-    public String toString () {
-        String ret = "   1   2   3   4   5   6   7   8   9   10\n";
-	for (int x = 0; x < _board.length; x++ ) {
-	    ret += x + 1 + " ";
-	    for (Tile t : _board[x]) {
-		ret += t + " " ;
-	    }
-	    ret += "\n";
+
+    //========== METHODS ==========//
+
+    public String toString() {
+	String output = "";
+
+	for( Tile[] r: _board ) {
+	    for( Tile c: r )
+		output += c + " ";
+	    output += "\n";
 	}
-	return ret;
+
+	return output;
     }
 
-    public void place (int r, int c, Tile t) {
-	_board[r-1][c-1] = t;
+    //why were these 2 private?
+    public Tile set( int r, int c, Tile newVal ) {
+	Tile oldValue = get(r,c);
+	_board[r][c] = newVal;
+	return oldValue;
     }
+
+    public Tile get( int r, int c ) {
+	return _board[r][c];
+    }
+
     public void flip (int r, int c) {
-	_board[r-1][c-1].flip();
+	_board[r][c].flip();
     }
-    public Tile get (int r, int c) {
-	return _board[r-1][c-1];
+    public int numShips () {
+	int total = 0;
+	for (Tile[] r : _board) {
+	    for (Tile t : r) {
+		if (t._type.equals("ship")) {
+		    total ++;
+		}
+	    }
+	}
+	return total;
     }
-    public getShips () {
 
-
+    //>>>>>>> aaa578ea6ba4bdc2e12631cccf5f293ff346bbb5
+    public static void main (String[] args) {
+	Board b = new Board();
+	System.out.println(b);
+    }
 
 }

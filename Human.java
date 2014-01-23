@@ -1,13 +1,24 @@
+import cs1.Keyboard;
+/*================================
+  class Human -- subclass of Player
+  ================================*/
+
 public class Human extends Player {
 
+    //========== Instance Variables ==========//
+
+
+    //========== Default Constructor ==========//
     public Human () {
 	super();
     }
-    public Human (String name) {
+
+    public Human (String nation) {
         this();
-	_nation = name;
+	_nation = nation;
     }
    
+    //========= METHODS ==========//
     public void attack (Player opp) {
 	int r, c;
 	System.out.print("Choose a row: ");
@@ -17,15 +28,15 @@ public class Human extends Player {
 	hit(opp, r, c);
     }
     public static void main (String[] args) {
-	Player person = new Human();
+	Player person = new Human("name");
 	//System.out.println(person);
 	//person._board[1][2] = new Tile("ship" , 1, "-x-");
-	person.place(1,2,new Tile("ship", 1, "-x-"));
-	person._board[0][1].flip();
+	person._battleField.set(1,2,new Tile("ship", 1, "-x-"));
+	person._battleField.flip(1,2);
 	System.out.println("before");
 	System.out.println(person);
         Player opp = new Human();
-	opp.attack(person, 1, 2);
+	opp.hit(person, 1, 2);
 	System.out.println("after");
 	System.out.println(person);
     }
