@@ -5,9 +5,17 @@ public class Human extends Player {
     }
     public Human (String name) {
         this();
-	_name = name;
+	_nation = name;
     }
    
+    public void attack (Player opp) {
+	int r, c;
+	System.out.print("Choose a row: ");
+	r = Keyboard.readInt();
+	System.out.print("Choose a column: ");
+	c = Keyboard.readInt();
+	hit(opp, r, c);
+    }
     public static void main (String[] args) {
 	Player person = new Human();
 	//System.out.println(person);

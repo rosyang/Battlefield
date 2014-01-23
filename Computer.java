@@ -5,7 +5,7 @@ public class Computer extends Player {
 
     public Computer() {
 	super();
-	_name = "Computer";
+	_nation = "Computerland";
     }
 
     public int guessR () {
@@ -13,5 +13,12 @@ public class Computer extends Player {
     }
     public int guessC () {
 	return 10 + (int) Math.random();
+    }
+
+    public attack (Player opp) {
+	
+	int r = guessR();
+	int c = guessC();
+	hit (opp, r, c);
     }
 }

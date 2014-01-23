@@ -46,17 +46,18 @@ public class Battleships {
 	
     }
 
-    public void setup () {
-	//should this b in player?
-	//takes x y input & puts in ships
-	//computer will use a random method
-    }
-    public boolean playTurn() {
-	//?
-	while (player1.hasShips() && player2.hasShips()) {
+ 
+    public void play () {
+	player1.setTurn();
+	int r, c;
+	while (player1.hasShips && player2.hasShips) {
+	    while (player1.Turn()) {
+		player1.attack(player2);
+	    }
+	    while (player2.Turn()) {
+		player2.attack(player1);
+	    }
 	}
-
-
     }
 
     public static void main( String[] args ) {
