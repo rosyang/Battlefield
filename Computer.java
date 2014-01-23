@@ -1,13 +1,11 @@
-import cs1.Keyboard;
 /*==================================
   class Computer -- subclass of Player
-  
   ==================================*/
 
 public class Computer extends Player {
     
     private int _prevR, _prevC;
-    private String _nation, _difficulty;//diff decided in driver file & affects how comp attacks
+    private String _nation, _difficulty;
 
     //========== Default Constructor ==========//
     
@@ -24,9 +22,6 @@ public class Computer extends Player {
     }
 
     //========== METHODS ==========//
-    public void setDiff (String d) {
-	_difficulty = d;
-    }
 
     public int guessR() {
 	//comp uses prev guess (if there was 1) to make an educauted guess
@@ -34,8 +29,8 @@ public class Computer extends Player {
 	if (_difficulty.equals("difficult") && _prevR != 100) {
 	    return _prevR + (int)(3 * Math.random()) - 1;
 	}
-	else //otherwise just pic a random # from 1 to 11 inclusive
-	    return 1+ (int)(10 * Math.random());
+	else //otherwise just pic a random # from 1 to 11
+	    return 1+ (int) (10 * Math.random());
     }
     public int guessC() {
 	if (_difficulty.equals("difficult") && _prevC != 100) {
@@ -45,7 +40,7 @@ public class Computer extends Player {
 	    return 1 + (int) (10 * Math.random());
     }
 
-    public void attack (Player opp) {
+    public void specialAttack (Player opp) {
 	
 	int r = guessR();
 	int c = guessC();
@@ -55,13 +50,17 @@ public class Computer extends Player {
 	}
     }
 
+    public void normalAttack (Player opp){}
+
     public void setPrevC (int c) {
-	_prevC = c;
+        _prevC = c;
     }
     public static void main (String[] args) {
-	Player pc = new Computer("difficult");
-	//--> typecasting might be issue in driver file
-	((Computer)pc).setPrevC(0);
-	System.out.println(((Computer)pc).guessC());
+        Player pc = new Computer("difficult");
+        //--> typecasting might be issue in driver file
+        ((Computer)pc).setPrevC(0);
+        System.out.println(((Computer)pc).guessC());
     }
+
+
 }
