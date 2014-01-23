@@ -52,7 +52,7 @@ public abstract class Player {
 	return _numShips > 0;
     }
 
-
+    public abstract void attack(Player opp);
     public boolean hit (Player opp, int r, int c) {
 	Tile t = opp._battlefield.get(r,c);
 	if (t._isFaceUp) {
@@ -75,8 +75,5 @@ public abstract class Player {
 	return _isTurn;
     }
 
-
-    public abstract void normalAttack (Player opp);
-    public abstract void specialAttack (Player opp);
 
 }

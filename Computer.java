@@ -5,7 +5,7 @@
 public class Computer extends Player {
     
     private int _prevR, _prevC;
-    private String _nation, _difficulty;
+    private String _difficulty;
 
     //========== Default Constructor ==========//
     
@@ -18,6 +18,7 @@ public class Computer extends Player {
     }
     public Computer (String diff) {
 	this();
+	_nation = "Computerland";
 	_difficulty = diff;
     }
 
@@ -40,7 +41,7 @@ public class Computer extends Player {
 	    return 1 + (int) (10 * Math.random());
     }
 
-    public void specialAttack (Player opp) {
+    public void attack (Player opp) {
 	
 	int r = guessR();
 	int c = guessC();
@@ -57,9 +58,19 @@ public class Computer extends Player {
     }
     public static void main (String[] args) {
         Player pc = new Computer("difficult");
-        //--> typecasting might be issue in driver file
+        Human h = new Human("human");
+	Tile t = new Tile("destroyer", 3, "-x-");
+	//t.flip();
+	pc._battlefield.set(3,1,t);
+	System.out.println(pc);
+	//System.out.println(h);
+	h.attack(pc);
+	System.out.println(pc);
+
+	/*
         ((Computer)pc).setPrevC(0);
-        System.out.println(((Computer)pc).guessC());
+        System.out.println(((Computer)pc).guessC());*/
+
     }
 
 

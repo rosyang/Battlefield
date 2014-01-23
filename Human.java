@@ -20,7 +20,7 @@ public class Human extends Player {
    
     //========= METHODS ==========//
 
-    /*
+    
     public void attack (Player opp) {
 	int r, c;
 	System.out.print("Choose a row: ");
@@ -29,10 +29,10 @@ public class Human extends Player {
 	c = Keyboard.readInt();
 	hit(opp, r, c);
     }
-    */
+    
 
-    public void normalAttack (Player opp){}
-    public void specialAttack (Player opp){}
+    //public void normalAttack (Player opp){}
+    //public void specialAttack (Player opp){}
 
     public static void main (String[] args) {
 	Player person = new Human("name");
