@@ -1,29 +1,25 @@
-
-
-import cs1.Keyboard;
-
 /*==============================================
   class Player -- superclass for the players of Battleships
   ==============================================*/
-//import java.util.ArrayList;
 
 public abstract class Player {
 
     //========== Instance Variables ==========//
     protected String _nation;
-    protected Board _battleField;
+    protected Board _battlefield;
     protected boolean _isTurn;
     protected int _numShips;
     protected int _shields;
 
+
     //========== Default Constructor =========//
-    //constructor (can't be instantiated b/c abstract)
     public Player () {
 	_numShips = 5;
-	_battleField = new Board();
 	_isTurn = false;
+	setBattlefield();
     }
 
+    //========== Constructor =========//
     public Player( String nation ){
 	this();
 	_nation = nation;
@@ -36,36 +32,42 @@ public abstract class Player {
     public String getNation() {
 	return _nation;
     }
-    public String getBattlefield() {
-	return _battleField.toString();
-    }
-    public void setBattlefield() {
-	_battleField = new Board();
-    }
-    
-    public boolean hasShips() {
-	return _battleField.numShips() > 0;
-    }
-    public boolean Turn () {
+    public boolean getTurn() {
 	return _isTurn;
     }
 
-    public abstract void attack (Player opp);
+
+    //Instantiates new board
+    public void setBattlefield() {
+	_battlefield = new Board();
+    }
+
+
+    public String toString() {
+	return _nation + " 's Board\n" + _battlefield;
+    }
+
+
+    public boolean hasShips() {
+	return _numShips > 0;
+    }
+
+
     public boolean hit (Player opp, int r, int c) {
-	Tile  t = opp._battleField.get(r,c);
+	Tile t = opp._battlefield.get(r,c);
 	if (t._isFaceUp) {
 	    if (! t._type.equals("water") || ! t._type.equals("axis")) {
 		if (opp._shields > 0) {
 		    opp._shields--;
 		}
 		else {
-		opp._battleField.flip(r,c);
+		    opp._battlefield.flip(r,c);
 		
 		_isTurn = true;
 		}
 	    }
 	    else if (t._type.equals("bonus")) {
-		opp._battleField.flip(r,c);
+		opp._battlefield.flip(r,c);
 		opp._shields++;
 	    }
 	}
@@ -73,8 +75,8 @@ public abstract class Player {
 	return _isTurn;
     }
 
-    public String toString () {
-	return _nation + "\n" + _battleField;
-    }
+
+    public abstract void normalAttack (Player opp);
+    public abstract void specialAttack (Player opp);
 
 }
