@@ -21,11 +21,12 @@ public class Board {
 		else if( c == 0 )
 		    set( r, c, new Tile("axis", 1, " " + r + " "  ));
 		else {
-		    if (Math.random() > .3) 
-			set( r, c, new Tile() );
-		    else
-			set(r, c, new Tile ("bonus", 1, "-o-"));
-		}
+                   if (Math.random() > .3) 
+                        set( r, c, new Tile() );
+                    else
+                        set(r, c, new Tile ("bonus", 1, "-o-"));
+                }
+
 	    }
     }
 
@@ -43,13 +44,13 @@ public class Board {
 
 	return output;
     }
+
     /*
     public void place (int r, int c, Sring dir, Tile ship) {
     first check if would fit in row/column
-	if dir.equals(east) {set (r, c += 1, "-x-" till reaches end of length
-	else if ...
+        if dir.equals(east) {set (r, c += 1, "-x-" till reaches end of length
+        else if ...
     */
-
 
     //why were these 2 private?
     public Tile set( int r, int c, Tile newVal ) {
@@ -77,7 +78,6 @@ public class Board {
 	return total;
     }
 
-    
     public static void main (String[] args) {
 	Board b = new Board();
 	System.out.println(b);
