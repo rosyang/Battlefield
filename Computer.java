@@ -1,4 +1,4 @@
-import cs1.keyboard;
+import cs1.Keyboard;
 /*==================================
   class Computer -- subclass of Player
   
@@ -31,18 +31,18 @@ public class Computer extends Player {
     public int guessR() {
 	//comp uses prev guess (if there was 1) to make an educauted guess
 	//will add a rand # from the range [-1,1]
-	if (_difficulty.equals("difficlut") && _prevR != 100) {
-	    return _prevR + 3*(int) Math.random() - 1;
+	if (_difficulty.equals("difficult") && _prevR != 100) {
+	    return _prevR + (int)(3 * Math.random()) - 1;
 	}
-	else //otherwise just pic a random # from 1 to 11
-	    return 1+ 10 * (int)Math.random();
+	else //otherwise just pic a random # from 1 to 11 inclusive
+	    return 1+ (int)(10 * Math.random());
     }
     public int guessC() {
-	if (_difficulty.equals("difficlut") && _prevC != 100) {
-	    return _prevC + 3*(int) Math.random() - 1;
+	if (_difficulty.equals("difficult") && _prevC != 100) {
+	    return _prevC + (int) (3 * Math.random()) - 1;
 	}
 	else 
-	    return 1+ 10 * (int)Math.random();
+	    return 1 + (int) (10 * Math.random());
     }
 
     public void attack (Player opp) {
@@ -55,4 +55,13 @@ public class Computer extends Player {
 	}
     }
 
+    public void setPrevC (int c) {
+	_prevC = c;
+    }
+    public static void main (String[] args) {
+	Player pc = new Computer("difficult");
+	//--> typecasting might be issue in driver file
+	((Computer)pc).setPrevC(0);
+	System.out.println(((Computer)pc).guessC());
+    }
 }
