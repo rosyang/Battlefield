@@ -19,6 +19,8 @@ public class Human extends Player {
     }
    
     //========= METHODS ==========//
+
+    /*
     public void attack (Player opp) {
 	int r, c;
 	System.out.print("Choose a row: ");
@@ -27,12 +29,17 @@ public class Human extends Player {
 	c = Keyboard.readInt();
 	hit(opp, r, c);
     }
+    */
+
+    public void normalAttack (Player opp){}
+    public void specialAttack (Player opp){}
+
     public static void main (String[] args) {
 	Player person = new Human("name");
 	//System.out.println(person);
 	//person._board[1][2] = new Tile("ship" , 1, "-x-");
-	person._battleField.set(1,2,new Tile("ship", 1, "-x-"));
-	person._battleField.flip(1,2);
+	person._battlefield.set(1,2,new Tile("ship", 1, "-x-"));
+	person._battlefield.flip(1,2);
 	System.out.println("before");
 	System.out.println(person);
         Player opp = new Human();
