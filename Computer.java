@@ -4,15 +4,16 @@
 
 public class Computer extends Player {
     
+
+    //========== Instance Variables ==========//
     private int _prevR, _prevC;
     private String _difficulty;
 
-    //========== Default Constructor ==========//
-    
+
+    //========== Default Constructor ==========//    
     public Computer() {
 	super();
 	_nation = "Computerland";
-	_difficulty = "easy";
 	_prevR = 100;
 	_prevC = 100;
     }
@@ -25,21 +26,24 @@ public class Computer extends Player {
     //========== METHODS ==========//
 
     public int guessR() {
-	//comp uses prev guess (if there was 1) to make an educauted guess
-	//will add a rand # from the range [-1,1]
-	if (_difficulty.equals("difficult") && _prevR != 100) {
+	//Computer uses previous guess (if there was one) to make an educauted guess
+	//Will add a random number from the range [-1,1]
+	if (_difficulty.equals("Hard") && _prevR != 100) {
 	    return _prevR + (int)(3 * Math.random()) - 1;
 	}
-	else //otherwise just pic a random # from 1 to 11
-	    return 1+ (int) (10 * Math.random());
+	//Otherwise just pick a random # from 1 to 11
+	else 
+	    return 1 + (int) (10 * Math.random());
     }
+
     public int guessC() {
-	if (_difficulty.equals("difficult") && _prevC != 100) {
+	if (_difficulty.equals("Hard") && _prevC != 100) {
 	    return _prevC + (int) (3 * Math.random()) - 1;
 	}
 	else 
 	    return 1 + (int) (10 * Math.random());
     }
+
 
     public void attack (Player opp) {
 	
@@ -51,11 +55,56 @@ public class Computer extends Player {
 	}
     }
 
-    public void normalAttack (Player opp){}
-
     public void setPrevC (int c) {
         _prevC = c;
     }
+
+
+    //procedure for placing ships on board
+    public void placeShip( Tile ship ) {
+	int length = ship.getLength();
+	int randRow = (int)(Math.random()*10);
+	int randCol = (int)(Math.random()*10);
+	String direction = "";
+	
+	if( _battlefield.get(randRow, randCol).getFace().equals("-X-") )
+	    placeShip(ship);
+	else {
+	    if( length > randRow ) {
+		if( length > randCol )
+		    direction = "East";
+		else if( length < randCol )
+		    direction = "South";
+	    }
+	    else if( length < randRow ) {
+		if( length > randCol )
+		    direction = "North";
+		else if( length < randCol )
+		    direction = "West";
+	    }
+
+	    for( int i = 0; i < length; i++ ) {
+		if( direction.equals("North") ) {
+		    _battlefield.set(randRow, randCol, ship);
+		    randRow--;
+		}
+		else if( direction.equals("East") ) {
+		    _battlefield.set(randRow, randCol, ship);
+		    randCol++;
+		}
+		else if( direction.equals("South") ) {
+		    _battlefield.set(randRow, randCol, ship);
+		    randRow++;
+		}
+		else if( direction.equals("West") ) {
+		    _battlefield.set(randRow, randCol, ship);
+		    randCol--;
+		}
+	    }
+	}
+    }
+
+
     public static void main (String[] args) {
         Player pc = new Computer("difficult");
         Human h = new Human("human");
