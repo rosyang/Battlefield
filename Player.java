@@ -29,6 +29,9 @@ public abstract class Player {
     //========== METHODS ==========//
     
     //Accessors
+    public Board getBattlefield() {
+	return _battlefield;
+    }
     public String getNation() {
 	return _nation;
     }
@@ -36,15 +39,13 @@ public abstract class Player {
 	return _isTurn;
     }
 
-
     //Instantiates new board
     public void setBattlefield() {
 	_battlefield = new Board();
     }
 
-
     public String toString() {
-	return _nation + " 's Board\n" + _battlefield;
+	return _nation + "'s Board\n" + _battlefield;
     }
 
 
@@ -52,11 +53,16 @@ public abstract class Player {
 	return _numShips > 0;
     }
 
+    //Procedure for placing ships on board
+    public abstract void placeShip( Tile ship );
+
     public abstract void attack(Player opp);
+
+
     public boolean hit (Player opp, int r, int c) {
 	Tile t = opp._battlefield.get(r,c);
-	if (t._isFaceUp) {
-	    if (! t._type.equals("water") || ! t._type.equals("axis")) {
+	if (t.isFaceUp() ) {
+	    if (! t.getType().equals("water") || ! t.getType().equals("axis")) {
 		if (opp._shields > 0) {
 		    opp._shields--;
 		}
@@ -66,7 +72,7 @@ public abstract class Player {
 		_isTurn = true;
 		}
 	    }
-	    else if (t._type.equals("bonus")) {
+	    else if (t.getType().equals("bonus")) {
 		opp._battlefield.flip(r,c);
 		opp._shields++;
 	    }
