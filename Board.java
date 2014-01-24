@@ -23,7 +23,6 @@ public class Board {
 		else { 
 		    set( r, c, new Tile() );
                 }
-
 	    }
 	}
     }
@@ -43,10 +42,10 @@ public class Board {
 	return output;
     }
 
-   public Tile set( int r, int c, Tile newVal ) {
-	Tile oldValue = get(r,c);
+   public boolean set( int r, int c, Tile newVal ) {
+	
 	_board[r][c] = newVal;
-	return oldValue;
+	return true;
     }
     public boolean free (int r, int c) {
 	return get(r,c)._type.equals("water");
@@ -67,58 +66,55 @@ public class Board {
     public boolean rangeFree (String dir, int r, int c, Tile t) {
 	boolean open = true;
 	if (dir.equals("north")) {
-	    for (int l = r; l < t._length; l ++) {
-		open = free(r,c);
+	    for (int l = r; l < t._length -1; l ++) {
+		open = free(l,c);
 	    }
 	}
 	else if (dir.equals("south")) {
-	    for (int l = r; l > t._length; l--) {
-		open = free(r,c);
+	    for (int l = r; l > t._length - 1; l--) {
+		open = free(l,c);
 	    }
 	}
 	else if (dir.equals("east")) {
-	    for (int l = c; l > t._length; l--) {
-	        open = free(r,c);
+	    for (int l = c; l > t._length -1; l--) {
+	        open = free(r,l);
 	    }
 	}
 	else {
-	    for (int l = c; l<t._length; l++) {
-	        open = free(r,c);
+	    for (int l = c; l<t._length -1; l++) {
+	        open = free(r,l);
 	    }
 	}
 	return open;
     }    
     public boolean place (int r, int c, String dir, Tile t) {
-	boolean boo = true;
+	boolean boo = false;
 	if (rangeFree(dir, r, c, t)) {
 	    if (dir.equals("north")) {
-		for (int l = r; l < t._length; l ++) {
-		    set (l, c, t);
+		for (int l = r; l <= t._length; l ++) {
+		    boo = set (l, c, t);
 		}
 	    }
 	    else if (dir.equals("south")) {
-		for (int l = r; l > t._length; l--) {
-		    set (l, c, t);
+		for (int l = r; l >= t._length; l--) {
+		    boo = set (l, c, t);
 		}
 	    }
 	    else if (dir.equals("east")) {
-		for (int l = c; l > t._length; l--) {
-		    set (r, l, t);
+		for (int l = c; l >= t._length; l--) {
+		    boo = set (r, l, t);
 		}
 	    }
 	    else {
-		for (int l = c; l<t._length; l++) {
-		    set (r, l, t);
+		for (int l = c; l<= t._length; l++) {
+		    boo = set (r, l, t);
 		}
 	    }
-	}
-	else {
-	    boo = false;
-	    System.out.println("out of range");
 	}
 	return boo;
 	
     }
+
 
     public Tile get( int r, int c ) {
 	return _board[r][c];
@@ -127,11 +123,21 @@ public class Board {
     public void flip (int r, int c) {
 	_board[r][c].flip();
     }
+    
+    //Flips all tiles of the board that are facing up
+    public void faceDown() {
+	for( Tile[] r: _board )
+	    for( Tile c: r )
+		if( c.isFaceUp() )
+		    c.flip();
+    }
+
+
     public int numShips () {
 	int total = 0;
 	for (Tile[] r : _board) {
 	    for (Tile t : r) {
-		if (t._type.equals("ship")) {
+		if (t.getType().equals("ship")) {
 		    total ++;
 		}
 	    }

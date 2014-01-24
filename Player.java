@@ -12,17 +12,18 @@ public abstract class Player {
     protected int _shields;
 
     //something
-    Tile s1 = new Tile ("rowboat", 2,"-x-");
-    Tile s2 = new Tile ("submarine", 3, "-x-");
+    Tile s0 = new Tile ("boat # 1", 2 , "-X-");
+    Tile s1 = new Tile ("boat # 2", 2,"-X-");
+    Tile s2 = new Tile ("submarine", 3, "-X-");
     Tile s3 = new Tile ("destroyer", 3, "-X-");
     Tile s4 = new Tile ("battleship", 4, "-X-");
     Tile s5 = new Tile ("aircraft carrier", 5, "-X-");
-    protected Tile[] ships = {s1, s2, s3, s4, s5};
+    protected Tile[] ships = {s0, s1, s2, s3, s4, s5};
     //========== Default Constructor =========//
     public Player () {
 	_numShips = 5;
 	_isTurn = false;
-	setBattlefield();
+	_battlefield = new Board();
     }
 
     //========== Constructor =========//
@@ -35,6 +36,9 @@ public abstract class Player {
     //========== METHODS ==========//
     
     //Accessors
+    public Board getBattlefield() {
+	return _battlefield;
+    }
     public String getNation() {
 	return _nation;
     }
@@ -45,26 +49,24 @@ public abstract class Player {
 	_isTurn = ! _isTurn;
     }
 
-
     //Instantiates new board
     public void setBattlefield() {
 	_battlefield = new Board();
     }
 
-
     public String toString() {
-	return _nation + " 's Board\n" + _battlefield;
+	return _nation + "'s Board\n" + _battlefield;
     }
 
 
     public boolean hasShips() {
-	return _numShips > 0;
+	return _battlefield.numShips() > 0;
     }
- 
+
     public boolean hit (Player opp, int r, int c) {
 	Tile t = opp._battlefield.get(r,c);
-	if (! t._isFaceUp) {
-	    if (! t._type.equals("water") || ! t._type.equals("axis")) {
+	if (t.isFaceUp() ) {
+	    if (! t.getType().equals("water") || ! t.getType().equals("axis")) {
 		if (opp._shields > 0) {
 		    opp._shields--;
 		    System.out.println("blocked\n");
@@ -75,7 +77,7 @@ public abstract class Player {
 		    System.out.println("Yay, a hit\n");
 		}
 	    }
-	    else if (t._type.equals("bonus")) {
+	    else if (t.getType().equals("bonus")) {
 		opp._battlefield.flip(r,c);
 		opp._shields++;
 		System.out.println("gained a bonus, +1 shield\n");
@@ -92,4 +94,11 @@ public abstract class Player {
     //abstract 
     public abstract void attack(Player opp);
     public abstract void setBoard ();
+    public static void main (String[] args) {
+	Player p = new Human();
+	Tile[] a = p.ships;
+	for (Tile t : a) {
+	    System.out.println(t._face);
+	}
+    }
 }

@@ -4,15 +4,16 @@
 
 public class Computer extends Player {
     
+
+    //========== Instance Variables ==========//
     private int _prevR, _prevC;
     private String _difficulty;
 
-    //========== Default Constructor ==========//
-    
+
+    //========== Default Constructor ==========//    
     public Computer() {
 	super();
 	_nation = "Computerland";
-	_difficulty = "easy";
 	_prevR = 100;
 	_prevC = 100;
 	setBoard();
@@ -27,21 +28,24 @@ public class Computer extends Player {
     //========== METHODS ==========//
 
     public int guessR() {
-	//comp uses prev guess (if there was 1) to make an educauted guess
-	//will add a rand # from the range [-1,1]
-	if (_difficulty.equals("difficult") && _prevR != 100) {
+	//Computer uses previous guess (if there was one) to make an educauted guess
+	//Will add a random number from the range [-1,1]
+	if (_difficulty.equals("Hard") && _prevR != 100) {
 	    return _prevR + (int)(3 * Math.random()) - 1;
 	}
-	else //otherwise just pic a random # from 1 to 11
-	    return 1+ (int) (10 * Math.random());
+	//Otherwise just pick a random # from 1 to 11
+	else 
+	    return 1 + (int) (10 * Math.random());
     }
+
     public int guessC() {
-	if (_difficulty.equals("difficult") && _prevC != 100) {
+	if (_difficulty.equals("Hard") && _prevC != 100) {
 	    return _prevC + (int) (3 * Math.random()) - 1;
 	}
 	else 
 	    return 1 + (int) (10 * Math.random());
     }
+
 
     public void attack (Player opp) {
 	
@@ -59,19 +63,17 @@ public class Computer extends Player {
 	String[] compass = {"north", "south", "east", "west"};
 	i = 0;
 	while (i < ships.length) {
-	    r = guessR();
-	    c = guessC();
+	    r = (int) (10 * Math.random());
+	    c = (int) (10 * Math.random());
 	    dir = compass[(int)( 4 * Math.random())];
-	    if (_battlefield.place(r,c,dir, ships[i]))
+	    if (_battlefield.place(r,c,dir, ships[i])) {
 		i++;
+	    }
 	}
     }
 
-    public void setPrevC (int c) {
-        _prevC = c;
-    }
     public static void main (String[] args) {
-        Player pc = new Computer("difficult");
+        Player pc = new Computer("Hard");
 	System.out.println(pc._battlefield.reveal());
         Human h = new Human("human");
 	Tile t = new Tile("destroyer", 3, "-x-");

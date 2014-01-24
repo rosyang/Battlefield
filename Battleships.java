@@ -4,36 +4,21 @@
   ===================================================*/
 
 import cs1.Keyboard;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
-public class Battleships extends JFrame {
+public class Battleships {
 
     //========== Instance Variables ==========//
     public final static int MAX_ROUNDS = 3;
 
     private Player player1, player2;
     private String type, nation;
-    private String winner;
 
     private String difficulty; //Applies only against the computer
     private boolean gameOver;
 
-    private JLabel s, s2;
-    private JButton b1, b2, b3, b4;
-    private JTextField t1;
-
 
     //========== Default Constructor ==========//
     public Battleships() {
-	setTitle( "Battleships Game" );
-	setSize( 800, 500 );
-	setLocation( 100, 100 );
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	setLayout( new FlowLayout() );
-
 	gameOver = false;
 	newGame();
     }
@@ -48,54 +33,43 @@ public class Battleships extends JFrame {
       ================================================*/
     public void newGame() {
 
-	eventHandler event = new eventHandler();
+	String s;
 
-	s = new JLabel("Welcome to Battleships!");
-	add(s);
-	s2 = new JLabel("Who do you want to play with?");
-	add(s2);
-	b1 = new JButton("2 players");
-	add(b1);
-	b2 = new JButton("Computer");
-	add(b2);
-	b1.addActionListener(event);
-	b2.addActionListener(event);
+	s = "Welcome to Battleships!\n";
+	s+= "\nWho do you want to play with?\n";
+	s+= "\t2 players\n";
+	s+= "\tComputer\n";
+	s+= "Choice: ";
+	System.out.print(s);
 
-	s2 = new JLabel("Choose a side, Player 1.");
-	add(s2);
-	t1 = new JTextField("Nation");
-	add(t1);
-	t1.addActionListener(event);
+	type = Keyboard.readString();
 
-	player1 = new Human(nation);
+	s = "\nChoose a side, Player 1. Nation: ";
+	System.out.print(s);
+	nation = Keyboard.readString();
+	player1 = new Human(nation);// will launch into setup from here
 
-	if( type.equals("2 players") ) {
-	    s2 = new JLabel("Choose a side, Player 2.");
-	    add(s2);
-	    t1 = new JTextField("Nation");
-	    add(t1);
-	    t1.addActionListener(event);
-
+	if( type.equals("2 Players") ) {
+	    s = "\nChoose a side, Player 2. Nation: ";
+	    System.out.print(s);
+	    nation = Keyboard.readString();
 	    player2 = new Human(nation);
 	}
 	else if( type.equals("Computer") ) {
-	    s2 = new JLabel("Choose your difficulty.");
-	    add(s2);
-	    b3 = new JButton("Easy");
-	    b3.setToolTipText("Computers are blind");
-	    add(b3);
-	    b4 = new JButton("Hard");
-	    b4.setToolTipText("Computers can be smart too");
-	    add(b4);
-	    b1.addActionListener(event);
-	    b2.addActionListener(event);
+	    s = "\nChoose your difficulty:\n";
+	    s+= "\tEasy (Computers are blind)\n";
+	    s+= "\tHard (Computers can be smart too)\n";
+	    s+= "Choice: ";
+	    System.out.print(s);
+
+	    difficulty = Keyboard.readString();	
 
 	    player2 = new Computer(difficulty);
 	}
-	
+
     }
 
-
+   
     /*==========================================
       boolean playTurn() -- simulates a round of battle
       pre: A Human or a Computer has been initialized
@@ -103,51 +77,30 @@ public class Battleships extends JFrame {
       the other player loses (all ships have been sunk)
       ==========================================*/
     public void play() {
-
-	int wins = 0;
-
-	newBoard();
-	player1.setTurn();
 	
         while (player1.hasShips() && player2.hasShips()) {
 	   
-	    while (player1.Turn()) {
-		player1.attack(player2);
+	    while (player1.getTurn()) {
+		player1.attack(player2);		
 	    }
-	    while (player2.Turn()) {
+	    while (player2.getTurn()) {
 		player2.attack(player1);
 	    }
-	}
-    }
-
-
-    private class eventHandler implements ActionListener {
-
-	public void actionPerformed( ActionEvent event ) {
-
-	    if( event.getSource() == b1 )
-		type = String.format("%s", event.getActionCommand() );
-	    else if( event.getSource() == b2 )
-		type = String.format("%s", event.getActionCommand() );
-
-	    if( event.getSource() == t1 )
-		nation = String.format("%s", event.getActionCommand() );
-
-	    if( event.getSource() == b3 )
-		difficulty = String.format("%s", event.getActionCommand() );
-	    else if( event.getSource() == b4 )
-		difficulty = String.format("%s", event.getActionCommand() );
 
 	}
 
+	if( !player1.hasShips() )
+	    System.out.println( "All of " + player1.getNation() + "'s ships have sunk. The winner of this war is " + player2.getNation() + "!" );
+	else if( !player2.hasShips() )
+	    System.out.println( "All of " + player2.getNation() + "'s ships have sunk. The winner of this war is " + player1.getNation() + "!" );
+
+       
     }
 
 
     public static void main( String[] args ) {
     
 	Battleships game = new Battleships();
-
-	game.setVisible( true );
     	
 	int rounds = 0;
 
@@ -155,11 +108,10 @@ public class Battleships extends JFrame {
 	    rounds++;
 	    System.out.println( "~~~~~~~ WORLD WAR " + rounds + " ~~~~~~~" );
 
-	    if( !(game.playTurn()) )
-		break;
+	    game.play();
 	}
 
-	System.out.println( "The game is over!\nThe winner is " + winner + "!" );
+	System.out.println( "\nThe game is over!" );
   
     }
 

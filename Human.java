@@ -1,12 +1,10 @@
-import cs1.Keyboard;
 /*================================
   class Human -- subclass of Player
   ================================*/
 
+import cs1.Keyboard;
+
 public class Human extends Player {
-
-    //========== Instance Variables ==========//
-
 
     //========== Default Constructor ==========//
     public Human () {
@@ -22,7 +20,8 @@ public class Human extends Player {
    
     //========= METHODS ==========//
 
-    
+
+	    
     public void attack (Player opp) {
 	int r, c;
 	System.out.print("Choose a row: ");
@@ -42,6 +41,8 @@ public class Human extends Player {
 	    System.out.println("\t" + s._type);
 	}
 	while (i < ships.length) {
+	    System.out.println("Here's your board:");
+	    System.out.println(_battlefield.reveal());
 	    System.out.println("Where do you want to place the " + ships[i]._type + "?");
 	    System.out.print("Choose a row: ");
 	    r = Keyboard.readInt();
@@ -51,10 +52,11 @@ public class Human extends Player {
 	    dir = Keyboard.readString();
 	    if (_battlefield.place(r,c,dir, ships[i])) 
 		i++;
+	    else 
+		System.out.println("out of range");
 	}
-	System.out.println("Here's your board:");
-	System.out.println(_battlefield.reveal());
     }
+
 
     public static void main (String[] args) {
 	Player person = new Human("name");
