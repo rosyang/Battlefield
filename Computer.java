@@ -15,6 +15,8 @@ public class Computer extends Player {
 	_difficulty = "easy";
 	_prevR = 100;
 	_prevC = 100;
+	setBoard();
+	_battlefield.sprinkle();
     }
     public Computer (String diff) {
 	this();
@@ -51,7 +53,19 @@ public class Computer extends Player {
 	}
     }
 
-    public void normalAttack (Player opp){}
+    public void setBoard() {
+	int r, c, i;
+	String dir;
+	String[] compass = {"north", "south", "east", "west"};
+	i = 0;
+	while (i < ships.length) {
+	    r = guessR();
+	    c = guessC();
+	    dir = compass[(int)( 4 * Math.random())];
+	    if (_battlefield.place(r,c,dir, ships[i]))
+		i++;
+	}
+    }
 
     public void setPrevC (int c) {
         _prevC = c;

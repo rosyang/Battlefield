@@ -1,0 +1,20 @@
+dates
+
+===========obstacles overcome==============
+github
+
+
+===========unresolved issues=================
+gui - there just wasn't enough time
+
+
+============cool stuff learned=================
+???
+
+
+=============mid - development design changes========
+the # of files changed, two were deleted one was created
+added more methods, was more complex than originally thought
+ship definition
+
+============lessons learned================

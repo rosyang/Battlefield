@@ -10,7 +10,7 @@ public class Tile {
     protected int _length;
     protected String _face;
     protected boolean _isFaceUp;
-
+    protected int shipId;//for ships only
     
     //========== Default constructor ==========//
     //default tile on a board represents water

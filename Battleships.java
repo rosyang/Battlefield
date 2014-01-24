@@ -94,43 +94,6 @@ public class Battleships extends JFrame {
 	}
 	
     }
- 
-
-    /*=========================================
-      void newBoard() -- sets up a new board
-      pre: A Human or a Computer has been initialized
-      post: 6 ships are placed on each player's board
-      =========================================*/
-    public void newBoard() {
-
-	int row;
-	int column;
-	String direction;
-
-	player1.setBattlefield();
-	player2.setBattlefield();
-
-	System.out.println( player1.getNation() + ", place your ships!" );
-	System.out.println( "You have 2 boats (-X--X-), 1 submarine(-X--X--X-), 1 destroyer (-X--X--X-), 1 battleship (-X--X--X--X-), and 1 aircraft carrier (-X--X--X--X--X-)." );
-
-	System.out.println( "Where do you want to place your two boats?" );
-	System.out.println( player1 );
-	System.out.println( "Row: " );
-	row = Keyboard.readInt();
-	System.out.println( "Column: " );
-	column = Keyboard.readInt();
-	System.out.println( "Direction (NESW): " );
-	direction = Keyboard.readString();
-
-	if( type == 1 ) {	    
-	}
-	else if( type == 2 ) {
-
-	    
-
-	}
-
-    }
 
 
     /*==========================================
@@ -139,7 +102,7 @@ public class Battleships extends JFrame {
       post: Returns true if one player wins and 
       the other player loses (all ships have been sunk)
       ==========================================*/
-    public boolean playTurn() {
+    public void play() {
 
 	int wins = 0;
 

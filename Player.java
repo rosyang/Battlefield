@@ -11,7 +11,13 @@ public abstract class Player {
     protected int _numShips;
     protected int _shields;
 
-
+    //something
+    Tile s1 = new Tile ("rowboat", 2,"-x-");
+    Tile s2 = new Tile ("submarine", 3, "-x-");
+    Tile s3 = new Tile ("destroyer", 3, "-X-");
+    Tile s4 = new Tile ("battleship", 4, "-X-");
+    Tile s5 = new Tile ("aircraft carrier", 5, "-X-");
+    protected Tile[] ships = {s1, s2, s3, s4, s5};
     //========== Default Constructor =========//
     public Player () {
 	_numShips = 5;
@@ -35,6 +41,9 @@ public abstract class Player {
     public boolean getTurn() {
 	return _isTurn;
     }
+    public void flipTurn() {
+	_isTurn = ! _isTurn;
+    }
 
 
     //Instantiates new board
@@ -51,29 +60,36 @@ public abstract class Player {
     public boolean hasShips() {
 	return _numShips > 0;
     }
-
-    public abstract void attack(Player opp);
+ 
     public boolean hit (Player opp, int r, int c) {
 	Tile t = opp._battlefield.get(r,c);
-	if (t._isFaceUp) {
+	if (! t._isFaceUp) {
 	    if (! t._type.equals("water") || ! t._type.equals("axis")) {
 		if (opp._shields > 0) {
 		    opp._shields--;
+		    System.out.println("blocked\n");
+		    flipTurn();
 		}
 		else {
 		    opp._battlefield.flip(r,c);
-		
-		_isTurn = true;
+		    System.out.println("Yay, a hit\n");
 		}
 	    }
 	    else if (t._type.equals("bonus")) {
 		opp._battlefield.flip(r,c);
 		opp._shields++;
+		System.out.println("gained a bonus, +1 shield\n");
+		flipTurn();
 	    }
 	}
-        _isTurn = false;
+	else {
+	    flipTurn();
+	    System.out.println("no luck\n");
+	}
 	return _isTurn;
     }
 
-
+    //abstract 
+    public abstract void attack(Player opp);
+    public abstract void setBoard ();
 }

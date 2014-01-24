@@ -11,6 +11,8 @@ public class Human extends Player {
     //========== Default Constructor ==========//
     public Human () {
 	super();
+	setBoard();
+	_battlefield.sprinkle();
     }
 
     public Human (String nation) {
@@ -29,10 +31,30 @@ public class Human extends Player {
 	c = Keyboard.readInt();
 	hit(opp, r, c);
     }
-    
 
-    //public void normalAttack (Player opp){}
-    //public void specialAttack (Player opp){}
+    public void setBoard() {
+	int r, c;
+	String dir;
+	int i = 0;
+	System.out.println(_nation + ", place your ships!" );
+	System.out.println("You have :");
+	for (Tile s : ships) {
+	    System.out.println("\t" + s._type);
+	}
+	while (i < ships.length) {
+	    System.out.println("Where do you want to place the " + s._type + "?");
+	    System.out.print("Choose a row: ");
+	    r = Keyboard.readInt();
+	    System.out.print("Choose a column: ");
+	    c = Keyboard.readInt();
+	    System.out.print("Choose a direction (north, south, east, west): ");
+	    dir = Keyboard.readString();
+	    if (_battlefield.place(r,c,dir, ships[i])) 
+		i++;
+	}
+	System.out.println("Here's your board:");
+	System.out.println(_battlefield.cheat());
+    }
 
     public static void main (String[] args) {
 	Player person = new Human("name");
