@@ -66,22 +66,22 @@ public class Board {
     public boolean rangeFree (String dir, int r, int c, Tile t) {
 	boolean open = true;
 	if (dir.equals("north")) {
-	    for (int l = r; l < t._length -1; l ++) {
+	    for (int l = r; l < r - t._length; l ++) {
 		open = free(l,c);
 	    }
 	}
 	else if (dir.equals("south")) {
-	    for (int l = r; l > t._length - 1; l--) {
+	    for (int l = r; l > r + t._length; l--) {
 		open = free(l,c);
 	    }
 	}
 	else if (dir.equals("east")) {
-	    for (int l = c; l > t._length -1; l--) {
+	    for (int l = c; l > r - t._length; l--) {
 	        open = free(r,l);
 	    }
 	}
 	else {
-	    for (int l = c; l<t._length -1; l++) {
+	    for (int l = c; l< r + t._length -1; l++) {
 	        open = free(r,l);
 	    }
 	}
