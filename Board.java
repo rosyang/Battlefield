@@ -21,12 +21,8 @@ public class Board {
 		else if( c == 0 )
 		    set( r, c, new Tile("axis", 1, " " + r + " "  ));
 		else {
-                   if (Math.random() > .3) 
-                        set( r, c, new Tile() );
-                    else
-                        set(r, c, new Tile ("bonus", 1, "-o-"));
+		    set( r, c, new Tile() );
                 }
-
 	    }
     }
 
@@ -45,19 +41,13 @@ public class Board {
 	return output;
     }
 
-    /*
-    public void place (int r, int c, Sring dir, Tile ship) {
-    first check if would fit in row/column
-        if dir.equals(east) {set (r, c += 1, "-x-" till reaches end of length
-        else if ...
-    */
 
-    //why were these 2 private?
     public Tile set( int r, int c, Tile newVal ) {
 	Tile oldValue = get(r,c);
 	_board[r][c] = newVal;
 	return oldValue;
     }
+
 
     public Tile get( int r, int c ) {
 	return _board[r][c];
@@ -66,11 +56,21 @@ public class Board {
     public void flip (int r, int c) {
 	_board[r][c].flip();
     }
+
+    //Flips all tiles of the board that are facing up
+    public void faceDown() {
+	for( Tile[] r: _board )
+	    for( Tile c: r )
+		if( c.isFaceUp() )
+		    c.flip();
+    }
+
+
     public int numShips () {
 	int total = 0;
 	for (Tile[] r : _board) {
 	    for (Tile t : r) {
-		if (t._type.equals("ship")) {
+		if (t.getType().equals("ship")) {
 		    total ++;
 		}
 	    }
