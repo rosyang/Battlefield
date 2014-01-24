@@ -72,6 +72,7 @@ public class Computer extends Player {
     }
     public static void main (String[] args) {
         Player pc = new Computer("difficult");
+	System.out.println(pc._battlefield.reveal());
         Human h = new Human("human");
 	Tile t = new Tile("destroyer", 3, "-x-");
 	//t.flip();
@@ -79,7 +80,7 @@ public class Computer extends Player {
 	System.out.println(pc);
 	//System.out.println(h);
 	h.attack(pc);
-	System.out.println(pc);
+	
 
 	/*
         ((Computer)pc).setPrevC(0);

@@ -17,7 +17,7 @@ public class Tile {
     public Tile() {
 	_type = "water";
 	_length = 1;
-	_face = "-W-";
+	_face = "   ";
 	_isFaceUp = false;
 	//Imagine water as the back of a tile. Tile flips when theres a ship/box
     }

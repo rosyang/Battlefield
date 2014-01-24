@@ -42,7 +42,7 @@ public class Human extends Player {
 	    System.out.println("\t" + s._type);
 	}
 	while (i < ships.length) {
-	    System.out.println("Where do you want to place the " + s._type + "?");
+	    System.out.println("Where do you want to place the " + ships[i]._type + "?");
 	    System.out.print("Choose a row: ");
 	    r = Keyboard.readInt();
 	    System.out.print("Choose a column: ");
@@ -53,7 +53,7 @@ public class Human extends Player {
 		i++;
 	}
 	System.out.println("Here's your board:");
-	System.out.println(_battlefield.cheat());
+	System.out.println(_battlefield.reveal());
     }
 
     public static void main (String[] args) {

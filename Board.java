@@ -139,9 +139,15 @@ public class Board {
 	return total;
     }
 
-    public static void main (String[] args) {
-	Board b = new Board();
-	System.out.println(b);
+    public String reveal () {
+	String ret = "";
+	for (Tile[] r: _board) {
+	    for (Tile t : r) {
+		ret += t._face;
+	    }
+	    ret += "\n";
+	}
+	return ret;
     }
 
 }
