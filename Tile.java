@@ -6,10 +6,10 @@
 public class Tile {
 
     //========== Instance Variables ==========//
-    protected String _type;
-    protected int _length;
-    protected String _face;
-    protected boolean _isFaceUp;
+    private String _type;
+    private int _length;
+    private String _face;
+    private boolean _isFaceUp;
 
     
     //========== Default constructor ==========//
@@ -19,7 +19,6 @@ public class Tile {
 	_length = 1;
 	_face = "-W-";
 	_isFaceUp = false;
-	//Imagine water as the back of a tile. Tile flips when theres a ship/box
     }
 
 
@@ -33,6 +32,17 @@ public class Tile {
 
 
     //========== METHODS ==========//
+
+    //Accessors
+    public int getLength() {
+	return _length;
+    }
+    public String getFace() {
+	return _face;
+    }
+    public String getType() {
+	return _type;
+    }
 
     public boolean isFaceUp() {
 	return _isFaceUp;
@@ -48,16 +58,7 @@ public class Tile {
 	if( _type.equals("axis") || isFaceUp() )
 	    return _face;
 	else
-	    return "-W-";
-    }
-
-
-    public boolean equals( Object rightSide ) {
-	
-	return ( this == rightSide ) || ( rightSide instanceof Tile 
-					  && this._face == ((Tile)rightSide)._face
-					  && this._isFaceUp == ((Tile)rightSide)._isFaceUp );
-	
+	    return "   ";
     }
 
 }
