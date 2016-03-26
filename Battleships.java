@@ -48,8 +48,8 @@ public class Battleships {
 	System.out.print(s);
 	nation = Keyboard.readString();
 	player1 = new Human(nation);// will launch into setup from here
-
-	if( type.equals("2 Players") ) {
+	if( type.equals("2 players") ) {
+	    System.out.println("setting up player 2....");
 	    s = "\nChoose a side, Player 2. Nation: ";
 	    System.out.print(s);
 	    nation = Keyboard.readString();
@@ -79,11 +79,13 @@ public class Battleships {
     public void play() {
 	
         while (player1.hasShips() && player2.hasShips()) {
-	   
+	    System.out.println("Game play started. Both players have ships");
 	    while (player1.getTurn()) {
+		System.out.println("It's Player 1's turn");
 		player1.attack(player2);		
 	    }
 	    while (player2.getTurn()) {
+		System.out.println("It's Player 2's turn");
 		player2.attack(player1);
 	    }
 
